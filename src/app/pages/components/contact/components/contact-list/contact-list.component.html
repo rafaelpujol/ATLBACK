@@ -1,0 +1,42 @@
+<div class="card">
+  <div class="card-body elevator">
+    <div class="row">
+      <div class="col-8">
+
+      </div>
+      <div class="col-4">
+
+      </div>
+    </div>
+    <div>
+      <table class="table color-table inverse-table">
+        <thead>
+        <tr>
+          <th>Nombre</th>
+          <th>Apellido</th>
+          <th>Correo</th>
+          <th class="text-center">Acción</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let g of gridData" >
+          <td>{{g.Name}}</td>
+          <td>{{g.LastName}}</td>
+          <td>{{g.Email}}</td>
+          <td class="text-center">
+            <a [routerLink]="['/pages/contact/edit/', g.Id]" class="btn btn-outline-info"><i class="fa fa-pencil" > </i> Editar</a>
+            &nbsp;        &nbsp;
+            <button  type="button" class="btn btn-outline-danger"  (click)="delete(g.Id)"> <i class="fa fa-trash" > </i> Borrar</button>
+          </td>
+        </tr>
+        </tbody>
+
+      </table>
+      <h5 class="text-center pb-5" *ngIf="gridData.length == 0">
+        <span class="label label-info">No existen datos para la busqueda actual.</span>
+      </h5>
+
+
+    </div>
+  </div>
+</div>

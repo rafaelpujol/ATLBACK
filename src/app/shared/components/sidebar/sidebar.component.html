@@ -1,0 +1,29 @@
+<aside class="left-sidebar">
+  <!-- Sidebar scroll-->
+  <div class="scroll-sidebar">
+    <!-- Sidebar navigation-->
+    <nav class="sidebar-nav">
+      <ul id="sidebarnav">
+        <li *ngFor="let item of menu" >
+<!--          <a  class="has-arrow"   [routerLink]="[item.url]"   [ngClass]="shareService.currentUrl.indexOf(item.url) > -1 ?  'isActive-link' : '' " [attr.aria-expanded]="item.active" >-->
+          <a  class="has-arrow"   [routerLink]="[item.url]"   [ngClass]="shareService.currentUrl.indexOf(item.url) > -1 ?  'isActive-link' : '' " [attr.aria-expanded]=" shareService.currentUrl.indexOf(item.url) > -1 ? 'true' : 'false'"  >
+            <i [ngClass]="item.icon"></i> <span class="hide-menu">{{item.label}} </span></a>
+          <ul [attr.aria-expanded]="shareService.currentUrl.indexOf(item.url) > -1 ? true : false"  [ngClass]="shareService.currentUrl.indexOf(item.url) > -1 ? 'collapse-in' : 'collapse' " >
+               <li *ngFor="let child of item.child">
+<!--                <a class="nav-link"    [ngClass]="child.active ?  'isActive-child-link' : '' "  [routerLink]="[child.url]" (click)="ClickMenuChild(item,child)"><i [ngClass]="child.icon"></i> {{child.label}}</a>-->
+                 <a class="nav-link"    [ngClass]="child.url.toLowerCase() == shareService.currentUrl.toLocaleLowerCase() ?  'isActive-child-link' : '' "  [routerLink]="[child.url]" ><i [ngClass]="child.icon"></i> {{child.label}}</a>
+               </li>
+          </ul>
+        </li>
+
+      </ul>
+    </nav>
+  </div>
+
+
+    <div class="version">
+      <div class="divider"></div>
+      Ver 0.1.1.1 <span>{{environmentName}}</span>
+    </div>
+      <!-- End Sidebar scroll-->
+</aside>

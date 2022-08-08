@@ -1,0 +1,122 @@
+<div class="form-bar">
+  <div class="card">
+    <div class="card-body elevator">
+      <small *ngIf="globalError != ''" class="text-danger font-weight-bolder"> {{globalError}}</small>
+
+      <div class="float-right">
+        <button  type="button"  class="btn btn-info" (click)="saveForm()"> <i class="fa fa-save" > </i> Guardar</button>
+        &nbsp;   &nbsp;
+        <button  type="button"  class="btn btn-danger" (click)="cancelForm()"> <i class="fa fa-cancel" > </i> Cancelar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="form-material form-container">
+  <div class=" row">
+    <div class="col-6">
+      <div class="card">
+        <div class="card-body elevator">
+          <div class="card-title card-title-plus">
+            Contacto
+          </div>
+          <form [formGroup]="contactForm">
+            <div class="row">
+              <div class="col-6">
+                <div class="form-group">
+                  <label>Nombre :</label>
+                  <input  class="form-control" id="Name" formControlName="Name" >
+                  <small *ngIf="contactForm.get('Name').invalid  && contactForm.get('Name').touched" class="text-danger">* Campo Requerido</small>
+                </div>
+              </div>
+
+              <div class="col-6">
+                <div class="form-group">
+                  <label>Apellidos :</label>
+                  <input  class="form-control"  formControlName="LastName" >
+                  <small *ngIf="contactForm.get('LastName').invalid  && contactForm.get('LastName').touched" class="text-danger">* Campo Requerido</small>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-8">
+                <div class="form-group">
+                  <label>Correo Electronico :</label>
+                  <input class="form-control"  formControlName="Email">
+                  <small *ngIf="contactForm.controls.Email?.errors?.email  && contactForm.get('Email').touched" class="text-danger">* Esto no es un email</small>
+                </div>
+              </div>
+            </div>
+
+
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-6">
+      <div class="card">
+        <div class="card-body elevator">
+          <div class="card-title card-title-plus">
+            Numeros
+          </div>
+          <div class="row">
+            <div class="col-2">
+              <div class="form-group">
+                <label>Tipo:</label>
+                <select  [(ngModel)]="contactNumber.Name"
+                  class="form-control form-control-line">
+                  <option *ngFor="let p of typeData"  [ngValue]="p.Name"> {{p.Name}}</option>
+                </select>
+
+              </div>
+            </div>
+            <div class="col-4">
+              <div class="form-group">
+                <label>Numero:</label>
+                <input class="form-control"  [(ngModel)]="contactNumber.Value" >
+              </div>
+
+            </div>
+
+            <div class="col-3">
+              <button  type="button"  *ngIf="!editContactNumber" class="btn btn-info" (click)="addNumber()"> <i class="fa fa-plus" > </i> Agregar </button>
+              <button  type="button"  *ngIf="editContactNumber" class="btn btn-info" (click)="updateNumber()"> <i class="fa fa-edit" > </i> Acutalizar </button>
+
+            </div>
+
+          </div>
+
+          <table class="table">
+            <thead>
+              <th>
+                 Tipo
+              </th>
+            <th>
+               Numero
+            </th>
+            <th class="text-center">
+              Acción
+            </th>
+            </thead>
+            <tbody>
+            <tr *ngFor="let g of listcontactNumber" >
+              <td>{{g.Name}}</td>
+              <td>{{g.Value}}</td>
+              <td class="text-center">
+                <button type="button" class="btn btn-outline-info"  (click)="editNumber(g)"><i class="fa fa-pencil" > </i> Editar </button>
+                &nbsp;        &nbsp;
+                <button  type="button" class="btn btn-outline-danger"  (click)="deleteNumber(g.Id, g)"> <i class="fa fa-trash" > </i> Borrar</button>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+
